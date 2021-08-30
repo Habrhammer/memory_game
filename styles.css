@@ -2,7 +2,12 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 body {
@@ -62,7 +67,7 @@ body {
   transform: scale(1);
   transform-style: preserve-3d;
   transition: transform .5s;
-  
+
 }
 
 .card:active {
@@ -120,10 +125,10 @@ body {
 }
 
 
-@media screen and (max-width: 750px){
-  body{
+@media screen and (max-width: 750px) {
+  body {
     background: #3ae6ca;
-    
+
   }
 
   .game {
@@ -154,6 +159,7 @@ body {
     z-index: 999;
     background: #fff;
   }
+
   #button {
     display: block;
     border-radius: 4px;
@@ -169,8 +175,9 @@ body {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
     background-color: rgb(43, 153, 91);
     border: 1px solid rgb(33, 126, 74);
-  
+
   }
+
   .restart_img {
     width: 46px;
     position: absolute;
