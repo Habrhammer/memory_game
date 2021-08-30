@@ -5,10 +5,10 @@ class Fruits {
     this.altImg = altImg;
   }
 }
-let arrFruit = [];
+let flippedCardsFruit = [];
 
 function addFruits(fruit, srcImg, altImg) {
-  arrFruit.push(new Fruits(fruit, srcImg, altImg));
+  flippedCardsFruit.push(new Fruits(fruit, srcImg, altImg));
 }
 
 addFruits("avocado", "img/авокадо.jpg", "Avocado");
@@ -29,7 +29,7 @@ addFruits("persimmon", "img/хурма.jpg", "Persimmon");
 addFruits("apple", "img/яблоко.jpg", "Apple");
 
 let template = function () {
-  for (let i = 0; i < arrFruit.length; i++) {
+  for (let i = 0; i < flippedCardsFruit.length; i++) {
     let cardDiv = document.createElement("div");
     let frontImg = document.createElement("img");
     let backImg = document.createElement("img");
@@ -40,10 +40,10 @@ let template = function () {
     cardDiv.appendChild(frontImg);
     cardDiv.appendChild(backImg);
     cardDiv.className = "card";
-    cardDiv.dataset.fruit = arrFruit[i].fruit;
+    cardDiv.dataset.fruit = flippedCardsFruit[i].fruit;
     frontImg.className = "front-face";
-    frontImg.src = arrFruit[i].srcImg;
-    frontImg.alt = arrFruit[i].altImg;
+    frontImg.src = flippedCardsFruit[i].srcImg;
+    frontImg.alt = flippedCardsFruit[i].altImg;
     backImg.className = "back-face";
     backImg.src = "img/Back.png";
     backImg.alt = "Back";
@@ -65,40 +65,46 @@ const cards = document.querySelectorAll(".card");
   }
 })();
 
-let arr = [];
+let flippedCards = [];
+
 function flipCard(e) {
-  e.target.parentElement.classList.add("flip");
-  arr.push(e.target.parentElement);
+  let card = e.target.parentElement;
 
-  if (arr.length == 2) {
-    deleteCards();
-  }
-  if (arr.length === 3) {
-    arr[0].classList.remove("flip");
-    arr[1].classList.remove("flip");
-    arr = arr.slice(2);
+  if (!card.classList.contains("flip") && card.classList.contains("card")) {
+    card.classList.add("flip");
+    flippedCards.push(card);
+    toCount();
   }
 
-  console.log(arr);
+  if (flippedCards.length == 2) {
+    checkCardDataset();
+  }
+  console.log(flippedCards);
+  returnCards();
 
-  toCount();
   result();
 }
 
-function deleteCards() {
-  if (arr[0].dataset.fruit === arr[1].dataset.fruit) {
-    arr[0].classList.add("invisible");
-    arr[1].classList.add("invisible");
+function checkCardDataset() {
+  if (flippedCards[0].dataset.fruit === flippedCards[1].dataset.fruit) {
+    flippedCards[0].classList.add("invisible");
+    flippedCards[1].classList.add("invisible");
   }
 }
 
-function returnCards() {}
+function returnCards() {
+  if (flippedCards.length === 3) {
+    flippedCards[0].classList.remove("flip");
+    flippedCards[1].classList.remove("flip");
+    flippedCards = flippedCards.slice(2);
+  }
+}
 
 let steps = 0;
 
 function toCount() {
   for (var i = 0; ; i++) {
-    if (arr.length == 2) {
+    if (flippedCards.length == 2) {
       steps += i + 1;
       break;
     }
